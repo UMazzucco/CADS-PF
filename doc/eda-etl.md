@@ -8,13 +8,21 @@ La selección abarca datos entre mayo de 1996 hasta julio de 2014.
 
 Se obtuvieron de la fuente asignada: <<http://jmcauley.ucsd.edu/data/amazon/links.html>>
 
-Se utilizan las reviews de productos con al menos 5 reseñas.
+Se utilizan las reviews de productos con al menos 5 reseñas, y no había registros duplicados.
 
-Los archivos originales se conservan.
+Los archivos originales se conservaron, manteniendo así un Data Lake mientras se trabajaba en un Data Warehouse constituido por archivos que se iban modificando.
+
+## DER
+
+![Alt text](../src/der.jpg?raw=true "")
 
 ## Productos
 
 Nos encontramos con un total de 9 millones de productos, aunque con muchos datos nulos.
+
+### Productos Original
+
+![Alt text](../src/products_first_look.png?raw=true "")
 
 ### Estructurados en las siguientes columnas
 
@@ -32,15 +40,15 @@ salesRank - Información sobre cómo rankea en ventas. Faltaba la mayor parte de
 
 brand - Nombre de la marca del producto. Sólo estaba el 10% de los datos, por lo que la descartamos. Sería información útil.
 
-categories - Lista de las categorías a las que pertenece el producto. Como related la convertimos en String y la limpiamos un poco.
-
-### Resultante Productos
-
-![Alt text](src/etl_products.png?raw=true "")
+categories - Lista de las categorías a las que pertenece el producto. Como related la convertimos en String y la limpiamos un poco. Luego normalizamos los valores en una lista reducida.
 
 ## Reviews
 
 Hacen un total de 40 millones de reseñas, sin datos nulos de importancia.
+
+### Reviews Original
+
+![Alt text](../src/reviews_first_look.png?raw=true "")
 
 ### Estructuradas en las siguientes columnas
 
@@ -62,6 +70,14 @@ unixReviewTime - Fecha de la reseña (unix time). Teniendo ya la fecha en un for
 
 reviewTime - Fecha de la reseña. La convertimos a Date.
 
-### Resultante Reviews
+## Procesamiento y unión
 
-![Alt text](src/etl_reviews.png?raw=true "")
+Finalmente, aplicamos un procesamiento de texto (detallado en otro documento) a las reseñas, quitamos de cada tabla los Id de producto que no estaban en la otra, y las unimos.
+
+![Alt text](../src/final_table.png?raw=true "")
+
+El resultado fue una única tabla que contenía 30 millones de reseñas, 2 millones de usuarios y un millón de productos.
+
+## EDA
+
+De los datos iniciales obtenemos que cada usuario compró alrededor de 15 productos, y que cada producto fue comprado por un promedio de 30 usuarios. Las categorías más populares son Libros y Electrónica. Utilizamos las cantidades de reseñas a modo de cantidades de ventas aunque no poseemos esa información. En su lugar, y partiendo del conocimiento de que entre el 3% y el 10% de los compradores deja una reseña del producto, hacemos la salvedad asumiendo que las ventas son proporcionales a las reseñas.

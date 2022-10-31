@@ -1,57 +1,51 @@
 # Proyecto ReBaF de CADS
 
-Proyecto ReBaF de CADS
+## About
+
+Este es un proyecto final para SoyHenry, en el que realizaremos un procesamiento y análisis de reseñas de amazon, además de un modelo de recomendación de productos. Para ello nos pusimos en la piel de una compañía ficticia de soluciones informáticas: CADS.
 
 ![Alt text](src/cads_logo_red.png?raw=true "")
 
+## Nuestro equipo
+
+![Alt text](src/team.png?raw=true "")
+
 ## Doc
 
-Contiene la documentación a lo largo del proyecto: planificación inicial, diagrama de gantt actualizado, consignas originales y presentaciones que se vayan realizando.
+La carpeta 'Doc' contiene la documentación a lo largo del proyecto: planificación inicial, consignas originales y explicaciones de los procesos que se fueron realizando.
 
 ## Test.json
 
-Archivo de reseñas de instrumentos musicales que se utilizó para hacer pruebas de script
+Archivo de reseñas de instrumentos musicales que se utilizó para hacer pruebas de código de manera local.
 
 ## Src
 
 Contiene imágenes que nos son de utilidad en el proyecto.
 
-## EDA_ETL.md
+## Code
 
-Describe dichos procesos
+Contiene los códigos utilizados en el proceso:
 
-## Scripts
+### Pipeline.sh
 
-La carpeta contiene distintos archivos de código que hemos utilizado:
+Realiza la obtención de los datos y su migración al sistema Hadoop.
 
-### Pipeline
+### Procesamiento.py
 
-Se utiliza ejecuta el script pipeline.sh en la consola del clúster: 'bash pipeline.sh'.
+Contiene toda la ETL, procesamiento de texto y unión de las tablas
 
-En caso que se quiera hacer con una selección de archivos o con archivos nuevos (como el dataset de instrumentos), se deben hacer comentarios y cambios de nombre pertinentes, manteniendo la estructura. Demora 59 minutos y 40 segundos.
+### To_bucket.sh
 
-![Alt text](src/pipeline_time_cut.png?raw=true "")
+Contiene los comandos utilizados para llevar el archivo resultante a un bucket para su posterior utilización en Looker.
 
-Para obtener el tiempo, se agrega 'time ' al principio del comando de ejecución.
+### Modelo_final.ipynb
 
-El resultado son los archivos en formato .json, que conservaremos a modo de Data Lake.
+Permite la ejecución del modelo de recomendación, que no modifica los archivos existentes.
 
-### ETL
+### Ipynb
 
-Ejecutamos los códigos en etl_*.ipynb creamos nuevos archivos .json sobre los cuales trabajaremos, generando así nuestro Data Warehouse.
+Contiene diversos archivos que se fueron utilizando a lo largo del proyecto.
 
-### Openers
-
-Ejecutando los códigos en *_opener.ipynb obtenemos un pantallazo de nuestros datos originales.
-
-## Gantt
+## Gantt del Proyecto (No incluye la semana previa de planificación)
 
 ![Alt text](src/gantt.png?raw=true "")
-
-## DER
-
-![Alt text](src/DER.jpeg?raw=true "")
-
-## Boceto Dashboard
-
-![Alt text](src/boceto_dash.jpeg?raw=true "")

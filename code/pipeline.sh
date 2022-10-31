@@ -16,9 +16,10 @@ mv reviews_Musical_Instruments_5.json test_raw.json
 
 echo 'Data renombrada'
 
-hdfs dfs -moveFromLocal /home/common/productos.json /data
-hdfs dfs -moveFromLocal /home/common/reviews.json /data
-hdfs dfs -moveFromLocal /home/common/test.json /data
+hdfs dfs -mkdr ../data
+hdfs dfs -moveFromLocal /home/common/productos_raw.json ../data
+hdfs dfs -moveFromLocal /home/common/reviews_raw.json ../data
+hdfs dfs -moveFromLocal /home/common/test_raw.json ../data
 
 echo 'Data movida a Hadoop'
 

@@ -7,10 +7,10 @@ import nltk
 nltk.download('vader_lexicon')
 
 spark = SparkSession.builder.appName('CADS').getOrCreate() #Ingresamos a la sesión de Spark
-products = spark.read.json("../common/data/products.json") #Abrimos el archivo Productos
+products = spark.read.json("../common/data/products_raw.json") #Abrimos el archivo Productos
 
 products = products.drop('imUrl', '_corrupt_record', 'brand', 'description', 'salesRank','price') #Tumbamos las columnas que no sirven
-products = products.selectExpr('asin as productId','categories as categories','related as related','title as title','price as price') #Renombramos las columnas
+products = products.selectExpr('asin as productId','categories as categories','related as related','title as title') #Renombramos las columnas
 products = products.dropna(subset='productId') #Quitamos los productos no iDentificados
 products = products.dropna(subset='title') #Quitamos los productos no iDentificados
 
@@ -65,7 +65,7 @@ categorias = { #Armamos un diccionario para normalizar las categorías
 
 products = products.replace(categorias,'categories') #Normalizamos las categorías
 
-reviews = spark.read.json("../common/data/reviews.json") #Abrimos el archivo Reviews
+reviews = spark.read.json("../common/data/reviews_raw.json") #Abrimos el archivo Reviews
 
 reviews = reviews.drop('helpful','summary','unixReviewTime','reviewerName') #Quitamos las columnas que no sirven
 reviews = reviews.selectExpr('asin as productId', 'overall as rating', 'reviewerID as reviewerId', 'reviewText as reviewText', 'reviewTime as reviewTime') #Renombramos las columnas
@@ -84,7 +84,7 @@ reviews = reviews.join(products,reviews['productId'] == products['productId'],"l
 #Definimos los diccionarios
 calidad = ['quality','condition','make','made','plastic','plastics','material','materials','finished','well-finished','solid','sturdy','durable','well-made','broken','weak','breaks','fragile']
 uso= ['use','using','easy','apply','employ','manipulate','effortless','straightforward','uncomplicated','difficile','hard', 'install', 'simple', 'complicated', 'difficult', 'difficulty', 'quickly', 'understand','learn']
-precio = ['price','cost','costs','pays','costly','overpriced','economical','low-cost','low-priced' 'expensive', 'cheap', 'cheaper', 'cheapest', 'worth']
+precio = ['price','cost','costs','pays','costly','overpriced','economical','low-cost','low-priced','expensive', 'cheap', 'cheaper', 'cheapest', 'worth']
 
 def condition(row):    #Función de Discretizado
     if row > 0.6: return 5

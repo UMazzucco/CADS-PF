@@ -1,4 +1,4 @@
-hdfs dfs -get ../common/data/jdefinitive ../data
+hdfs dfs -get ../common/data/definitive ../data
 
 echo 'Data local'
 
