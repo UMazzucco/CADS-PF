@@ -49,3 +49,13 @@ Contiene diversos archivos que se fueron utilizando a lo largo del proyecto.
 ## Gantt del Proyecto (No incluye la semana previa de planificación)
 
 ![Alt text](src/gantt.png?raw=true "")
+
+## Presentación del Proyecto
+
+### PDF
+
+[Presentación.pdf](https://github.com/UMazzucco/CADS-PF/blob/main/DashBoard_CADS%20(1).pdf)
+
+### Video
+
+[<img src='https://user-images.githubusercontent.com/103452945/235527603-d4cafc43-f5a2-425e-8241-b07c7f7c1a66.png'>](https://youtu.be/cEbYY2_4sBI)
